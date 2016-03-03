@@ -1,0 +1,10 @@
+Explain ~ pins on breadboard
+Using the long columns for power and ground on breadboard
+Using a resistor with LEDs
+Add relative links within presentation
+Add animation to Buttons title
+Add gif examples for each challenge and example
+Consider adding comments to your code to help explain what's going on
+Consider task to mess with breadboard and LED to make sure people understand breadboard layout
+Add note to avoid issue with installing Arduino IDE on Windows.  Talk to Evelyn about it.
+Add alt property to images
