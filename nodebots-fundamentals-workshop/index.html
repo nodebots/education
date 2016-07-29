@@ -1,0 +1,1006 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Nodebots Fundamentals Workshop 2015</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/print.css" type="text/css" media="print">
+    <!-- <link rel="stylesheet" href="css/reveal.css"> -->
+    <!-- <link rel="stylesheet" href="css/themes/simple.css" id="theme"> -->
+
+
+    <link rel="stylesheet" href="lib/zenburn.css">
+    <style>
+    button {
+      -webkit-appearance: none;
+      -webkit-user-select: none;
+      background-image: -webkit-linear-gradient(#ededed, #ededed 38%, #dedede);
+      border: 1px solid rgba(0, 0, 0, 0.25);
+      border-radius: 2px;
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08),
+          inset 0 1px 2px rgba(255, 255, 255, 0.75);
+      color: #444;
+      font: inherit;
+      margin: 0 1px 0 0;
+      text-shadow: 0 1px 0 rgb(240, 240, 240);
+    }
+
+    </style>
+
+
+    <script src="lib/es6-shim.js"></script>
+    <script src="lib/jquery.min.js"></script>
+    <script src="lib/TweenMax.min.js"></script>
+    <script src="lib/unprefix.js"></script>
+    <script src="lib/eventemitter.js"></script>
+<!--
+    <script src="lib/progress.js"></script>
+    <script src="lib/simulation.js"></script>
+ -->
+    <script src="lib/popcorn.js"></script>
+    <script>
+
+    Popcorn(function() {
+      var cues = {
+        // "#sequence-b": 0,
+        // "#audience": 0,
+        // "#walking": 0,
+        // "#dancing": 0,
+        // "#brat-dof": 2,
+        // "#brat-kicking": 3,
+        // "#scout-demo-front": 11,
+        // "#brat-obstacles-001": 0,
+        // "#brat-obstacles-003": 0,
+      };
+
+      var media = document.querySelectorAll("video");
+      var videos = [].reduce.call(media, function(accum, elem) {
+        var id = "#" + elem.id;
+        return (accum[id] = cues[id] || 0, accum);
+      }, {});
+
+      Object.keys(videos).forEach(function(id, k) {
+        var cue = videos[id];
+        Popcorn(id).on("canplayall", function() {
+          this.currentTime(cue).on("click", function() {
+            this.controls(true).play();
+            this.media.requestFullScreen();
+          }).on("ended", function() {
+            this.currentTime(cue);
+
+            if (this.media.webkitExitFullScreen) {
+              this.media.webkitExitFullScreen();
+            }
+          });
+        });
+      });
+    });
+    </script>
+
+  </head>
+  <body>
+    <div class="reveal">
+
+      <!-- Used to fade in a background when a specific slide state is reached -->
+      <div class="state-background"></div>
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+
+        <section>
+          <img src="https://raw.githubusercontent.com/nodebots/nodebots.io/gh-pages/logo/nodebot-450x450.png" style="width: 450px">
+
+          <h3><a href="http://nodebots.io" target="_blank" data-destyle>nodebots.io</a></h3>
+          <script>
+            // Delicously hacky. Look away.
+            if (navigator.userAgent.match(/(iPhone|iPad|iPod|Android)/i)) document.write('<p style="color: rgba(0,0,0,0.3); text-shadow: none;">(' + 'Tap to navigate' + ')</p>');
+          </script>
+        </section>
+
+        <section>
+          <img src="https://github.com/rwaldron/johnny-five/raw/master/assets/sgier-johnny-five.png" style="width: 450px">
+
+          <h3><a href="http://johnny-five.io" target="_blank" data-destyle>johnny-five.io</a></h3>
+
+        </section>
+
+
+        <section>
+          <br><br><br><br>
+          <h1>Follow Along <br>
+            <a href="http://gul.ly/3tjj" target="_blank" data-destyle>gul.ly/3tjj</a>
+          </h1>
+        </section>
+
+        <section>
+          <br><br><br>
+<h2>Francis Gulotta</h2>
+<h2>Rick Waldron</h2>
+        </section>
+
+        <section>
+          <br><br><br>
+<h2><a href="http://twitter.com/reconbot" target="_blank" data-destyle>@reconbot</a></h2>
+<h2><a href="http://twitter.com/rwaldron" target="_blank" data-destyle>@rwaldron</a></h2>
+        </section>
+
+
+        <section>
+          <br><br><br>
+          <h1>
+            Important Points<br> To Consider
+          </h1>
+        </section>
+
+        <section>
+          <br>
+          <h1>
+            The only dumb question is the one you never asked.
+          </h1>
+        </section>
+
+        <section>
+          <br>
+          <h1>
+            Doesn't work? <br> It's probably the hardware.
+          </h1>
+        </section>
+
+        <section>
+          <br><br>
+          <h1>
+            Let's learn about <br> the kit!
+          </h1>
+        </section>
+
+
+
+        <section>
+          <br><br>
+          <h1>
+            Be Kind, Rewind.
+          </h1>
+          <h3><a href="http://www.seeedstudio.com/depot/ARDX-The-starter-kit-for-Arduino-p-1153.html" target="_blank" data-destyle>Buy Your Own Here!</a></h3>
+        </section>
+
+        <section>
+          <h3>The Box</h3>
+          <img src="kit-000-alt.jpg" style="width: 600px">
+        </section>
+
+        <section>
+          <h3>Arduino Uno</h3>
+          <img src="arduino_desktop.jpg" style="width: 800px">
+        </section>
+
+        <section>
+          <h3>Breadboard: Solderless wiring</h3>
+          <img src="kit-001.jpg" style="width: 600px">
+        </section>
+
+        <section>
+          <h3>Breadboard: Electrical Connections</h3>
+          <img src="breadboard-conections.jpg" style="width: 600px">
+        </section>
+
+        <section>
+          <h3>Typical "Projects" Booklet</h3>
+          <img src="kit-003.jpg" style="width: 600px">
+
+          <h4><a href="http://http://node-ardx.org/" target="_blank" data-destyle>node-ardx.org by Anna Gerber</a></h4>
+        </section>
+
+        <section>
+          <h3>Wiring Recipes</h3>
+          <img src="kit-004.jpg" style="width: 600px">
+        </section>
+
+        <section>
+          <h3>Servo: Actuate Physical Movement</h3>
+          <img src="kit-005.jpg" style="width: 600px">
+        </section>
+
+        <section>
+          <h3>Attach The Horn!</h3>
+          <img src="kit-006.jpg" style="width: 600px">
+        </section>
+
+        <section>
+          <h3>Resistors: Reduce Current Flow, lower Voltage Level</h3>
+          <img src="kit-007.jpg" style="width: 600px">
+        </section>
+
+        <section>
+          <h3>LEDs: Light Up Your Life</h3>
+          <img src="kit-008.jpg" style="width: 600px">
+        </section>
+
+        <section>
+          <h3>Buttons, Relay, Potentiometer, Buzzer, Shift Register</h3>
+          <img src="kit-009.jpg" style="width: 600px">
+        </section>
+
+        <section>
+          <h3>Buttons, Potentiometer</h3>
+          <img src="kit-010.jpg" style="width: 600px">
+        </section>
+
+        <section>
+          <h3>Sensor: Temperature</h3>
+          <img src="kit-011.jpg" style="width: 600px">
+        </section>
+
+        <section>
+          <h3>Jumper Wires! </h3>
+          <img src="kit-020.jpg" style="width: 600px">
+        </section>
+
+
+        <section>
+          <br><br><br><br>
+          <h1>
+            Ready To Make Stuff?
+          </h1>
+        </section>
+
+        <section>
+<h2>Quick Preparation Stuff</h2>
+  <pre><code contenteditable>mkdir nodebots;
+
+cd nodebots;
+
+npm init -y;
+
+npm install johnny-five;
+
+open .
+  </code></pre>
+
+
+
+
+
+
+
+<!--           <h3><code>mkdir nodebots;</code></h3>
+          <h3><code>cd nodebots;</code></h3>
+          <h3><code>npm init -y;</code></h3>
+          <h3><code>npm install johnny-five;</code></h3>
+          <h3><code>open .</code></h3> -->
+        </section>
+
+
+        <section>
+          <br><br><br><br>
+          <h1>
+            Return to hardware
+          </h1>
+        </section>
+
+        <section>
+          <br><br><br><br>
+          <h1>
+            Let's Create Output
+          </h1>
+        </section>
+
+
+          <section>
+            <img src="led.png" style="width: 600px">
+          </section>
+
+          <section>
+            <br><br>
+            <h1>
+              Connect The Arduino to your computer <br> via USB.
+            </h1>
+          </section>
+
+
+          <section>
+            <h3>Don't do this:</h3>
+  <pre><code contenteditable>$ node
+> var j5 = require("johnny-five");
+undefined
+> var board = new j5.Board();
+undefined
+> 1432581579628 Looking for connected device
+> var board = new j5.Board();
+undefined
+> 1432581593535 Device(s) /dev/cu.usbmodem1411
+1432581593554 Connected /dev/cu.usbmodem1411
+
+undefined
+> 1432581594739 Looking for connected device
+
+undefined
+>
+undefined
+  </code></pre>
+          </section>
+
+          <section>
+            <br><br><br><br>
+            <h1>
+              Make a new file
+            </h1>
+          </section>
+
+          <section>
+            <h2>Turn on the LED</h2>
+  <pre><code contenteditable>var five = require("johnny-five");
+var board = new five.Board();
+
+board.on("ready", function() {
+  var led = new five.Led(11);
+
+  led.on();
+});
+  </code></pre>
+  <h3><code>node led-on.js</code></h3>
+          </section>
+
+          <section>
+            <img src="led.png" style="width: 600px">
+          </section>
+
+
+          <section>
+            <h2>Make it blink</h2>
+  <pre><code contenteditable>var five = require("johnny-five");
+var board = new five.Board();
+
+board.on("ready", function() {
+  var led = new five.Led(11);
+
+  led.blink();
+});
+  </code></pre>
+  <h3><code>node led-blink.js</code></h3>
+          </section>
+
+          <section>
+            <img src="led.png" style="width: 600px">
+          </section>
+
+          <section>
+            <h2>Change the blink rate.</h2>
+  <pre><code contenteditable>var five = require("johnny-five");
+var board = new five.Board();
+
+board.on("ready", function() {
+  var led = new five.Led(11);
+
+  led.blink(1000); // <-- ms on/off phases
+});
+  </code></pre>
+  <h3><code>node led-blink-slow.js</code></h3>
+          </section>
+
+
+          <section>
+            <h2>Manual, live control</h2>
+  <pre><code contenteditable>var five = require("johnny-five");
+var board = new five.Board();
+
+board.on("ready", function() {
+  var led = new five.Led(11);
+
+  this.repl.inject({
+    led: led
+  });
+});
+  </code></pre>
+  <h3><code>node led-boss.js</code></h3>
+          </section>
+
+
+          <section>
+            <h2>Type these commands in the REPL</h2>
+  <pre><code contenteditable>> led.on();
+
+> led.off();
+
+> led.blink();
+
+> led.stop();
+
+> led.pulse();
+
+  </code></pre>
+          </section>
+
+
+        <section>
+          <br><br><br>
+          <h1>
+            Create Digital Input
+          </h1>
+          <h1>
+            0|1
+          </h1>
+        </section>
+
+        <section>
+          <h2>
+            LOW = 0 = 0V
+          </h2>
+          <h2>
+            HIGH = 1 = <code>~</code>5V
+          </h2>
+          <h2>
+             GND = G = Ground
+          </h2>
+          <h2>
+             VCC = V = Voltage
+          </h2>
+          <h2>
+             Ohms = Ω = Resistance
+          </h2>
+        </section>
+
+        <section>
+          <br><br>
+          <h2>
+             V = Voltage measured in volts
+          </h2>
+          <h2>
+             I = Current measured in amps
+          </h2>
+          <h2>
+             R = Resistance measured in ohms/Ω
+          </h2>
+        </section>
+
+        <section>
+          <h2>Ohm's Law</h2>
+
+          <img src="ohms-law2.jpg" width="600">
+        </section>
+
+        <section>
+          <h2>Ohm's Law Applied</h2>
+
+          <img src="vir.png" width="600">
+        </section>
+
+        <section>
+          <h1>Pull Up Resistor</h1>
+          <h2>Limit current flow between VCC and INPUT: a HIGH signal when the button is <em>up</em>, and a LOW signal when the button is <em>down</em>. Pressing the button closes the circuit to GND
+          </h2>
+        </section>
+
+
+        <section>
+          <img src="pull-up-resistor-1.png">
+        </section>
+
+        <section>
+          <img src="pull-up-resistor-2.png">
+        </section>
+
+        <section>
+          <img src="pull-up-resistor-3.png">
+        </section>
+
+
+        <section>
+          <h1>Pull Down Resistor</h1>
+          <h2>Limit current flow between VCC and GND, resulting in a LOW signal when the button is <em>up</em>, and a HIGH  signal when the button is <em>down</em>.
+          </h2>
+        </section>
+
+        <section>
+          <img src="pull-down-resistor-1.png">
+        </section>
+
+        <section>
+          <img src="pull-down-resistor-2.png">
+        </section>
+
+        <section>
+          <img src="pull-down-resistor-3.png">
+        </section>
+
+        <section>
+          <img src="button.png" style="width: 800px">
+        </section>
+
+        <section>
+          <h3>Respond to Button Press & Release</h3>
+<pre><code contenteditable>var five = require("johnny-five");
+var board = new five.Board();
+
+board.on("ready", function() {
+  var button = new five.Button(2);
+
+  button.on("press", function() {
+    console.log("Button Pressed!");
+  });
+
+  button.on("release", function() {
+    console.log("Button Released!");
+  });
+});
+</code></pre>
+<h3><code>node button.js</code></h3>
+        </section>
+
+        <section>
+          <h3>Convert Input to Output</h3>
+<pre><code contenteditable>var five = require("johnny-five");
+var board = new five.Board();
+
+board.on("ready", function() {
+  var led = new five.Led(11);
+  var button = new five.Button(2);
+
+  button.on("press", function() {
+    led.on();
+  });
+
+  button.on("release", function() {
+    led.off();
+  });
+});
+</code></pre>
+<h3><code>node button.js</code></h3>
+        </section>
+
+        <section>
+          <h3>Multiple States of Input to Multiple States of Output</h3>
+<pre><code contenteditable>var five = require("johnny-five");
+var board = new five.Board();
+
+board.on("ready", function() {
+  var led = new five.Led(11);
+  var button = new five.Button(2);
+
+  button.on("press", function() {
+    led.on();
+  });
+
+  button.on("hold", function() {
+    led.blink(50);
+  });
+
+  button.on("release", function() {
+    led.stop().off();
+  });
+});
+</code></pre>
+<h3><code>node button.js</code></h3>
+        </section>
+
+        <section>
+          <br><br><br>
+          <h1>
+            Observe Analog Input
+          </h1>
+        </section>
+
+        <section>
+          <br><br>
+          <h1>
+            0-1023
+          </h1>
+          <h1>
+            <!-- This is fucking stupid. Leaque Gothic puts the tilde at the top of the letter -->
+            <code>~</code>5V in 10 bits
+          </h1>
+        </section>
+
+        <section>
+          <h2>
+            Side Quest!
+          </h2>
+          <h2>
+            Open Developer Tools Console in either Firefox, Chrome or Edge, paste this:
+          </h2>
+          <br>
+          <h3><code>
+            0b1111111111
+          </code></h3>
+          <br>
+          <h2>
+            Hit &lt;enter&gt;
+          </h2>
+        </section>
+
+        <section>
+          <h2>
+            Binary Logarithm: Inverse of POW 2<br>
+            Number of bits equals integral part of
+          </h2>
+          <img src="log2n-plus-1.png">
+          <br><br>
+          <h4>
+            <code>let bits = n => Math.log2(n) + 1 | 0;</code><br><br><br>
+            <code>bits(1023) === 10; // true</code>
+          </h4>
+
+        </section>
+
+        <section>
+          <img src="analog.png" style="width: 800px">
+        </section>
+
+        <section>
+          <h3>Receive Values From a Sensor</h3>
+<pre><code contenteditable>var five = require("johnny-five");
+var board = new five.Board();
+
+board.on("ready", function() {
+  var rotary = new five.Sensor("A0");
+
+  rotary.on("change", function() {
+    console.log("Sensor changed!", this.value);
+  });
+});
+</code></pre>
+<h3><code>node sensor.js</code></h3>
+        </section>
+
+        <section>
+          <br><br><br>
+          <h2><code>
+            npm install barcli
+          </code></h2>
+          <h4>(say: barklee)</h4>
+        </section>
+
+        <section>
+          <h3>Analog Data</h3>
+<pre><code contenteditable>var Barcli = require("barcli");
+var five = require("johnny-five");
+var board = new five.Board({
+  debug: false, repl: false
+});
+board.on("ready", function() {
+  var range = [0, 100];
+  var graph = new Barcli({
+    label: "Potentiometer",
+    range: range,
+  });
+  var rotary = new five.Sensor("A0");
+
+  rotary.scale(range).on("change", function() {
+    graph.update(this.value);
+  });
+});
+</code></pre>
+<h3><code>node sensor.js</code></h3>
+        </section>
+
+
+        <section>
+          <br><br><br>
+          <h1>Convert 10-bit Input <br>to 8-bit Output</h1>
+        </section>
+
+        <section>
+          <img src="analog.png" style="width: 800px">
+        </section>
+
+        <section>
+          <h1>PWM</h1>
+
+          <h3>
+            Pulse Width Modulation, or PWM, is a technique for getting analog results with digital means. <br>Digital control is used to create a square wave, a signal switched between on and off.
+            <br>
+            - Arduino.cc
+          </h3>
+
+        </section>
+
+        <section>
+          <br><br>
+          <h1>8-bit PWM</h1>
+          <h2>
+            255 "steps" from 0% to 100% duty cycle
+          </h2>
+        </section>
+
+        <section>
+          <img src="pwm.gif" style="width: 400px;background-color:#ffffff">
+        </section>
+
+        <section>
+          <img src="pwm-bits.png" style="width: 400px;background-color:#ffffff">
+        </section>
+
+        <section>
+          <br>
+          <h2 style="text-align:left"><code>
+            0b00000000 (0)
+            0b01000000 (64)
+            0b01111111 (127*)
+            0b10111111 (191)
+            0b11111111 (255*)
+          </code></h2>
+        </section>
+
+
+        <section>
+          <br><br><br><br>
+          <h2><code>
+            0b1111111111
+            0b0011111111
+          </code></h2>
+        </section>
+
+        <section>
+          <br><br><br><br>
+          <h2 style="text-align:left"><code>
+            0b1111111111 >> 2
+            0b0011111111
+            0b11111111&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            255&nbsp;
+          </code></h2>
+          <br>
+        </section>
+
+
+        <section>
+          <h3>Convert 10-bit Analog Input to 8-bit PWM Output</h3>
+<pre><code contenteditable>var five = require("johnny-five");
+var board = new five.Board();
+
+board.on("ready", function() {
+  var led = new five.Led(11);
+  var rotary = new five.Sensor("A0");
+
+  rotary.on("change", function() {
+    // Analog sensors produce a 10-bit value,
+    // but led brightness is an 8-bit PWM value.
+    // Convert by shifting the value's bits
+    // two places to the right.
+    led.brightness(this.value >> 2);
+  });
+});
+</code></pre>
+<h3><code>node sensor.js</code></h3>
+        </section>
+
+        <section>
+          <br><br><br>
+          <h1>Convert 10-bit Input <br>to Degrees</h1>
+        </section>
+
+        <section>
+          <img src="servo-wiring.jpg" style="width: 800px">
+        </section>
+
+
+        <section>
+          <img src="analog-control-servo.png" style="width: 800px">
+        </section>
+
+        <section>
+          <h2>Scale [0, 1023] => [0, 180]</h2>
+<pre><code contenteditable>var five = require("johnny-five");
+var board = new five.Board();
+
+board.on("ready", function() {
+  var servo = new five.Servo(11);
+  var rotary = new five.Sensor("A0");
+
+  // scale accepts a single array or two arguments
+  rotary.scale(0, 180).on("change", function() {
+    servo.to(this.value);
+  });
+});
+</code></pre>
+<h3><code>node sensor.js</code></h3>
+        </section>
+
+        <section>
+          <br><br><br>
+          <h1>Observe The Environment</h1>
+        </section>
+
+
+        <section>
+          <img src="TMP36.jpg" style="width: 800px">
+        </section>
+
+        <section>
+          <img src="temperature.png" style="width: 800px">
+        </section>
+
+        <section>
+          <h3>Temperature</h3>
+<pre><code contenteditable>var five = require("johnny-five");
+var board = new five.Board();
+
+board.on("ready", function() {
+  var temp = new five.Temperature({
+    controller: "TMP36",
+    pin: "A0"
+  });
+
+  temp.on("change", function() {
+    // "change" will occur as a result of analog line noise.
+    // Write a filtering mechanism to fine tune the output.
+    console.log(this.celsius + "°C");
+  });
+});
+</code></pre>
+<h3><code>node temperature.js</code></h3>
+        </section>
+
+       <section>
+          <br><br><br>
+          <h1>Convert Temperature to RGB</h1>
+        </section>
+
+        <section>
+          <img src="diffused-rgb-led.jpg" style="width: 600px">
+        </section>
+
+
+        <section>
+          <img src="temperature-rgb.png" style="width: 800px">
+        </section>
+
+        <section>
+          <h3>Temperature Display</h3>
+<pre><code contenteditable>var five = require("johnny-five");
+var board = new five.Board();
+
+board.on("ready", function() {
+  var temp = new five.Temperature({
+    controller: "TMP36",
+    pin: "A0"
+  });
+
+  var rgb = new five.Led.RGB({
+    pins: [3, 5, 6],
+    isAnode: true
+  });
+
+  temp.on("change", function() {
+    // Write an algorithm that converts temperature (F, K or C)
+    // into an RGB hex value.
+    rgb.color(??????);
+  });
+});
+</code></pre>
+        </section>
+
+
+        <section>
+          <br><br><br>
+          <h1>Experimentation<br> Time!</h1>
+
+        </section>
+
+
+
+
+        <section>
+          <img src="sgier-johnny-five.png" style="width:400px;height:400px">
+          <h3>
+            johnny-five.io
+          </h3>
+          <h3>
+            github.com/rwaldron/johnny-five
+          </h3>
+          <h3>
+            twitter.com/rwaldron/lists/nodebotics
+          </h3>
+
+        </section>
+
+
+        <section>
+          <img src="bocoup-200.png">
+          <h1>Bocoup</h1>
+          <h3>@bocoup</h3>
+          <h3>bocoup.com</h3>
+        </section>
+
+
+        <section>
+          <br><br><br><br>
+          <h1>Bonus Material</h1>
+        </section>
+
+        <section>
+          <br><br><br><br>
+          <h2>Pages in the ARDX Book to ignore</h2>
+          <h3>4, 5, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33<h3>
+        </section>
+
+
+      </div>
+
+      <!-- The navigational controls UI -->
+      <aside class="controls">
+        <a class="left" href="#">&#x25C4;</a>
+        <a class="right" href="#">&#x25BA;</a>
+        <a class="up" href="#">&#x25B2;</a>
+        <a class="down" href="#">&#x25BC;</a>
+      </aside>
+
+      <!-- Displays presentation progress, max value changes via JS to reflect # of slides -->
+      <div class="progress"><span></span></div>
+
+    </div>
+
+    <!-- Optional libraries for code syntax highlighting and classList support in IE9 -->
+
+    <script src="lib/highlight.js"></script>
+    <script src="lib/classList.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+    // Parse the query string into a key/value object
+    var query = {};
+
+    location.search.replace( /[A-Z0-9]+?=(\w*)/gi, function(a) {
+      query[ a.split( "=" ).shift() ] = a.split( "=" ).pop();
+    });
+
+    var images = Array.from(document.querySelectorAll("img"));
+
+    images.forEach(function(image) {
+      var anchor = document.createElement("a");
+      var clone = image.cloneNode();
+
+      anchor.href = clone.src;
+      anchor.target = "_blank";
+      anchor.appendChild(clone);
+
+      image.parentNode.replaceChild(anchor, image);
+    });
+
+    $(function() {
+      $("[data-destyle]").each(function() {
+        $(this).removeClass("roll").text($(this).find("span").text());
+      });
+    });
+    // Fires each time a new slide is activated
+    Reveal.addEventListener("slidechanged", function( event ) {
+      videos.forEach(function( node ) {
+        node.pause();
+        node.controls = false;
+      });
+    });
+
+    Reveal.initialize({
+      // Display controls in the bottom right corner
+      controls: true,
+
+      // Display a presentation progress bar
+      progress: true,
+
+      // If true; each slide will be pushed to the browser history
+      history: true,
+
+      // Loops the presentation, defaults to false
+      loop: false,
+
+      // Flags if mouse wheel navigation should be enabled
+      mouseWheel: true,
+
+      // Apply a 3D roll to links on hover
+      rollingLinks: true,
+
+      // UI style
+      theme: query.theme || "neon", // default/neon
+
+      // Transition style
+      transition: query.transition || "default" // default/cube/page/concave/linear(2d)
+    });
+
+    hljs.initHighlightingOnLoad();
+    </script>
+
+  </body>
+</html>
