@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>reveal.js – The HTML Presentation Framework</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+        <section>
+          <h1>Welcome to NodeBots Day NYC!</h1>
+          <img data-src="images/j5-johnny-five.png">
+        </section>
+
+        <section data-transition="zoom-in slide-out">
+          <h2>It's great to have you all here</h2>
+        </section>
+
+        <section>
+          <h2>Meetup.com is the best</h2>
+          <div class="fragment">For hosting us</div>
+          <div class="fragment">For buying us lunch</div>
+          <div class="fragment">For volunteering to help</div>
+        </section>
+
+        <section>
+          <h2>Meetup.com is also a great site</h2>
+          <img data-src="images/meetup.jpg">
+          <div><em>Meetup: Find your people</em></div>
+          <div class="fragment"><a href="http://nodebots.nyc">NodeBots.NYC</a> uses it <em>all</em> the time.</div>
+        </section>
+
+        <section data-transition-speed="fast" data-transition="fade-out">
+          <h2>Thanks to Bocoup</h2>
+          <img src="images/bob-bust-600.png">
+        </section>
+
+        <section data-transition="fade-in">
+          <h2>Thanks to Bocoup</h2>
+          <div class="fragment">for organizing today</div>
+          <div class="fragment">for starting Johnny-Five</div>
+          <div class="fragment">for making the J5IK</div>
+          <div class="fragment">for letting Francis, Rick and Lyza build robots all day.</div>
+        </section>
+
+        <section>
+          <p>
+            We gather here today to learn something new, together.
+          </p>
+          <p>
+            We're all here to learn, we all learn more by teaching.
+          </p>
+          <span class="fragment">To do that we follow a <a href="http://nodebots.io/conduct.html">code of conduct</a>.</span>
+        </section>
+
+        <section>
+          <h2>Code of Conduct</h2>
+          <ul>
+            <li class="fragment">Be respectful.</li>
+            <li class="fragment">We're here to help talk to us.</li>
+            <li class="fragment">Abusive behavior is never tolerated.</li>
+            <li class="fragment">Don't build evil robots.</li>
+            <li class="fragment">Follow the rules or leave.</li>
+          </ul>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Schedule
+
+            - 10:00-12:00 Getting Startup and Setup
+            - 12:00 Lunch!
+            - 4:00-4:45 Demos!
+            - 4:45pm Cleanup!
+          </script>
+        </section>
+
+        <section>
+          <h2>Getting Started</h2>
+          <p>
+            Wifi: Meetup Guest<br>
+            Wifi Password: &lt;look on the wall&gt;
+          </p>
+          <p>
+            Follow along with the <br>
+            <a href="https://learn.sparkfun.com/tutorials/experiment-guide-for-the-johnny-five-inventors-kit/software-installation-and-setup">Experiment Guide for the Johnny-Five Inventor's Kit</a><br>
+            <a href="https://sparkfun.com/j5ik">sparkfun.com/j5ik</a>
+          </p>
+        </section>
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true },
+          { src: 'plugin/notes/notes.js', async: true }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>
